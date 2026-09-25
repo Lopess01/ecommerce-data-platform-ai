@@ -40,11 +40,6 @@
           "displayName": "Ticket médio",
           "description": "Receita total dividida pelo total de compras, em R$ (não é média de médias).",
           "expression": "SUM(`receita`) / SUM(`total_compras`)"
-        },
-        {
-          "displayName": "Receita",
-          "description": "Soma da receita dos clientes, em R$.",
-          "expression": "SUM(`receita`)"
         }
       ]
     }
@@ -329,13 +324,13 @@
                   "fieldName": "measure(Ticket médio)",
                   "displayName": "Ticket médio",
                   "format": {
-                    "type": "number-currency",
-                    "currencyCode": "BRL",
+                    "type": "number-plain",
                     "decimalPlaces": {
                       "type": "exact",
                       "places": 2
                     }
-                  }
+                  },
+                  "formatTemplate": "R$ {{ @formatted }}"
                 }
               },
               "frame": {
@@ -463,8 +458,8 @@
                       "expression": "`segmento_cliente`"
                     },
                     {
-                      "name": "measure(Receita)",
-                      "expression": "MEASURE(`Receita`)"
+                      "name": "sum(receita)",
+                      "expression": "SUM(`receita`)"
                     }
                   ],
                   "disaggregated": false
@@ -494,7 +489,7 @@
                   }
                 },
                 "y": {
-                  "fieldName": "measure(Receita)",
+                  "fieldName": "sum(receita)",
                   "scale": {
                     "type": "quantitative"
                   },
@@ -561,8 +556,8 @@
                       "expression": "`regiao`"
                     },
                     {
-                      "name": "measure(Receita)",
-                      "expression": "MEASURE(`Receita`)"
+                      "name": "sum(receita)",
+                      "expression": "SUM(`receita`)"
                     },
                     {
                       "name": "segmento_cliente",
@@ -591,7 +586,7 @@
                   }
                 },
                 "y": {
-                  "fieldName": "measure(Receita)",
+                  "fieldName": "sum(receita)",
                   "scale": {
                     "type": "quantitative"
                   },

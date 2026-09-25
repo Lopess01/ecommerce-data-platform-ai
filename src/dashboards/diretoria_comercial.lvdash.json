@@ -18,11 +18,6 @@
       ],
       "columns": [
         {
-          "displayName": "Receita",
-          "description": "Soma da receita das vendas, em R$.",
-          "expression": "SUM(`receita`)"
-        },
-        {
           "displayName": "Vendas",
           "description": "Número de vendas (pedidos).",
           "expression": "COUNT(`id_venda`)"
@@ -252,8 +247,8 @@
                   "datasetName": "ds_vendas",
                   "fields": [
                     {
-                      "name": "measure(Receita)",
-                      "expression": "MEASURE(`Receita`)"
+                      "name": "sum(receita)",
+                      "expression": "SUM(`receita`)"
                     }
                   ],
                   "disaggregated": false
@@ -265,16 +260,16 @@
               "widgetType": "counter",
               "encodings": {
                 "value": {
-                  "fieldName": "measure(Receita)",
+                  "fieldName": "sum(receita)",
                   "displayName": "Receita",
                   "format": {
-                    "type": "number-currency",
-                    "currencyCode": "BRL",
+                    "type": "number-plain",
                     "decimalPlaces": {
                       "type": "exact",
                       "places": 2
                     }
-                  }
+                  },
+                  "formatTemplate": "R$ {{ @formatted }}"
                 }
               },
               "frame": {
@@ -363,13 +358,13 @@
                   "fieldName": "measure(Ticket médio)",
                   "displayName": "Ticket médio",
                   "format": {
-                    "type": "number-currency",
-                    "currencyCode": "BRL",
+                    "type": "number-plain",
                     "decimalPlaces": {
                       "type": "exact",
                       "places": 2
                     }
-                  }
+                  },
+                  "formatTemplate": "R$ {{ @formatted }}"
                 }
               },
               "frame": {
@@ -452,8 +447,8 @@
                       "expression": "`canal`"
                     },
                     {
-                      "name": "measure(Receita)",
-                      "expression": "MEASURE(`Receita`)"
+                      "name": "sum(receita)",
+                      "expression": "SUM(`receita`)"
                     }
                   ],
                   "disaggregated": false
@@ -475,7 +470,7 @@
                   }
                 },
                 "y": {
-                  "fieldName": "measure(Receita)",
+                  "fieldName": "sum(receita)",
                   "scale": {
                     "type": "quantitative"
                   },
@@ -538,8 +533,8 @@
                       "expression": "`canal`"
                     },
                     {
-                      "name": "measure(Receita)",
-                      "expression": "MEASURE(`Receita`)"
+                      "name": "sum(receita)",
+                      "expression": "SUM(`receita`)"
                     }
                   ],
                   "disaggregated": false
@@ -564,7 +559,7 @@
                   }
                 },
                 "y": {
-                  "fieldName": "measure(Receita)",
+                  "fieldName": "sum(receita)",
                   "scale": {
                     "type": "quantitative"
                   },
@@ -710,8 +705,8 @@
                       "expression": "`hora_rotulo`"
                     },
                     {
-                      "name": "measure(Receita)",
-                      "expression": "MEASURE(`Receita`)"
+                      "name": "sum(receita)",
+                      "expression": "SUM(`receita`)"
                     }
                   ],
                   "disaggregated": false
@@ -762,7 +757,7 @@
                   }
                 },
                 "y": {
-                  "fieldName": "measure(Receita)",
+                  "fieldName": "sum(receita)",
                   "scale": {
                     "type": "quantitative"
                   },
@@ -810,8 +805,8 @@
                       "expression": "`categoria`"
                     },
                     {
-                      "name": "measure(Receita)",
-                      "expression": "MEASURE(`Receita`)"
+                      "name": "sum(receita)",
+                      "expression": "SUM(`receita`)"
                     }
                   ],
                   "disaggregated": false
@@ -823,7 +818,7 @@
               "widgetType": "bar",
               "encodings": {
                 "x": {
-                  "fieldName": "measure(Receita)",
+                  "fieldName": "sum(receita)",
                   "scale": {
                     "type": "quantitative"
                   },

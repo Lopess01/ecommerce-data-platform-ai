@@ -295,13 +295,13 @@
                   "fieldName": "measure(Receita dos mais caros confirmados)",
                   "displayName": "Receita dos mais caros confirmados",
                   "format": {
-                    "type": "number-currency",
-                    "currencyCode": "BRL",
+                    "type": "number-plain",
                     "decimalPlaces": {
                       "type": "exact",
                       "places": 2
                     }
-                  }
+                  },
+                  "formatTemplate": "R$ {{ @formatted }}"
                 }
               },
               "frame": {

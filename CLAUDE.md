@@ -47,6 +47,10 @@ Project guidance for AI agents lives in AGENTS.md and conventions below.
   de cada dia útil.
 - Data e hora estão em UTC: diga isso no eixo.
 - `diferenca_pct_*` está em pontos percentuais (10 = 10%): divida por 100 para usar o formato de %.
+- Não crie campo calculado (`columns` do dataset) que seja só a soma de uma coluna, como
+  `SUM(receita)`: o gráfico falha com "circular reference detected in calculated field". Use
+  `SUM(\`receita\`)` direto no widget; campo calculado só para fórmulas (ticket médio, % VIP).
+- Todo `fieldName` dos encodings precisa existir nos `fields` da consulta do widget.
 
 ## Números de referência (conferidos no Job em dev, 25/09/2026)
 
