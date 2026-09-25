@@ -753,6 +753,11 @@
     }
   ],
   "uiSettings": {
+    "genieSpace": {
+      "isEnabled": true,
+      "overrideId": "01f1b91f35dc15fe8c08a2bdc9d9c7f2",
+      "enablementMode": "ENABLED"
+    },
     "theme": {
       "canvasBackgroundColor": {
         "light": "#F7F8FA",

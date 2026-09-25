@@ -1,0 +1,382 @@
+{
+  "version": 2,
+  "config": {
+    "sample_questions": [
+      {
+        "id": "00000000000000000000000000000100",
+        "question": [
+          "Como a receita evoluiu dia a dia em cada canal?"
+        ]
+      },
+      {
+        "id": "00000000000000000000000000000101",
+        "question": [
+          "Qual o ticket médio em cada canal?"
+        ]
+      },
+      {
+        "id": "00000000000000000000000000000102",
+        "question": [
+          "Quantos clientes temos em cada região e segmento?"
+        ]
+      },
+      {
+        "id": "00000000000000000000000000000103",
+        "question": [
+          "Quais clientes TOP_TIER estão mais perto de virar VIP?"
+        ]
+      },
+      {
+        "id": "00000000000000000000000000000104",
+        "question": [
+          "Em quais categorias estamos mais caros que a média do mercado?"
+        ]
+      },
+      {
+        "id": "00000000000000000000000000000105",
+        "question": [
+          "Quais produtos mais caros que todos os concorrentes têm maior receita?"
+        ]
+      }
+    ]
+  },
+  "data_sources": {
+    "tables": [
+      {
+        "identifier": "projetodados.gold.clientes_segmentacao",
+        "column_configs": [
+          {
+            "column_name": "estado",
+            "synonyms": [
+              "UF",
+              "unidade federativa"
+            ],
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "nome_estado",
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "receita",
+            "synonyms": [
+              "faturamento",
+              "vendas em R$",
+              "valor vendido"
+            ]
+          },
+          {
+            "column_name": "regiao",
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "segmento_cliente",
+            "synonyms": [
+              "perfil",
+              "perfil do cliente",
+              "segmento"
+            ],
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          }
+        ]
+      },
+      {
+        "identifier": "projetodados.gold.precos_competitividade",
+        "column_configs": [
+          {
+            "column_name": "categoria",
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "classificacao_preco",
+            "synonyms": [
+              "posição de preço",
+              "posicionamento de preço"
+            ],
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "marca",
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "receita",
+            "synonyms": [
+              "faturamento",
+              "vendas em R$",
+              "valor vendido"
+            ]
+          }
+        ]
+      },
+      {
+        "identifier": "projetodados.gold.vendas_detalhadas",
+        "column_configs": [
+          {
+            "column_name": "canal_venda",
+            "synonyms": [
+              "canal"
+            ],
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "categoria",
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "dia_semana",
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "estado",
+            "synonyms": [
+              "UF",
+              "unidade federativa"
+            ],
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "faixa_preco",
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "marca",
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "receita",
+            "synonyms": [
+              "faturamento",
+              "vendas em R$",
+              "valor vendido"
+            ]
+          },
+          {
+            "column_name": "regiao",
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "segmento_cliente",
+            "synonyms": [
+              "perfil",
+              "perfil do cliente",
+              "segmento"
+            ],
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          }
+        ]
+      },
+      {
+        "identifier": "projetodados.gold.vendas_produtos",
+        "column_configs": [
+          {
+            "column_name": "categoria",
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "faixa_preco",
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "marca",
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "receita",
+            "synonyms": [
+              "faturamento",
+              "vendas em R$",
+              "valor vendido"
+            ]
+          }
+        ]
+      },
+      {
+        "identifier": "projetodados.gold.vendas_temporais",
+        "column_configs": [
+          {
+            "column_name": "canal_venda",
+            "synonyms": [
+              "canal"
+            ],
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "dia_semana",
+            "enable_format_assistance": true,
+            "enable_entity_matching": true
+          },
+          {
+            "column_name": "receita",
+            "synonyms": [
+              "faturamento",
+              "vendas em R$",
+              "valor vendido"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "instructions": {
+    "text_instructions": [
+      {
+        "id": "00000000000000000000000000000200",
+        "content": [
+          "Regras de negócio da Diretoria E-commerce. Unidade e cálculo de cada coluna estão nos comentários das tabelas: siga-os.\n",
+          "- Responda sempre em português do Brasil. Dinheiro em R$ com 2 casas decimais (ex.: R$ 1.234,56).\n",
+          "- Receita é bruta (quantidade x preço unitário). NÃO existem custo, margem, lucro, frete ou devolução: se perguntarem, não gere SQL; diga que esses dados não existem e ofereça a receita.\n",
+          "- Os dados vão de 13/12/2025 a 11/01/2026. \"No mês\", \"até agora\", \"no período\" ou pergunta sem data = período inteiro. Nunca use current_date(), now() ou datas relativas no SQL.\n",
+          "- \"Hoje\", \"ontem\", \"esta semana\", \"semana passada\": não gere SQL. Explique em texto que os dados vão de 13/12/2025 a 11/01/2026, que 11/01/2026 não é hoje, e pergunte se a pessoa quer ver 11/01/2026.\n",
+          "- Tabela por tipo de pergunta: quando (dia, hora, dia da semana) e canal -> vendas_temporais; produto, categoria, marca -> vendas_produtos; cliente, estado, região, segmento -> clientes_segmentacao; preço vs. concorrência -> precos_competitividade; perguntas que cruzam diretorias (ex.: região x categoria, canal x segmento) -> vendas_detalhadas.\n",
+          "- Ticket médio = receita / número de vendas, nunca média da coluna ticket_medio: SUM(receita)/SUM(total_vendas) em vendas_temporais e vendas_produtos; SUM(receita)/COUNT(*) em vendas_detalhadas; SUM(receita)/SUM(total_compras) em clientes_segmentacao.\n",
+          "- Conte produtos por id_produto.\n",
+          "- Dia da semana: compare pela receita MÉDIA por dia, SUM(receita)/COUNT(DISTINCT data), porque o período tem 5 sábados e 5 domingos e só 4 de cada dia útil. Responda com o dia de maior média e cite também o dia de maior receita total, explicando que ele lidera no total por aparecer 5 vezes.\n",
+          "- \"Mais caro que o mercado\" = diferenca_pct_vs_media > 0. \"Mais caro que todos\" = classificacao_preco = 'MAIS_CARO_QUE_TODOS'.\n",
+          "- Toda contagem de produtos em precos_competitividade separa confirmados (possui_preco_suspeito = false) dos com preço suspeito (a confirmar antes de reagir), traz o total e diz em que categoria estão os suspeitos.\n",
+          "- Em \"qual X vende mais\" ou \"gera mais receita\", traga receita, número de vendas e ticket médio. Se X for região, estado ou segmento, SEMPRE inclua também o número de clientes (COUNT(DISTINCT id_cliente)). Nos demais casos não traga clientes; nunca some clientes_unicos.\n",
+          "- Mostre o canal como 'E-commerce' (ecommerce) e 'Loja física' (loja_fisica).\n",
+          "- Rankings (\"melhores\", \"top\", \"quais mais\") com 10 linhas, salvo se pedirem outro número.\n"
+        ]
+      }
+    ],
+    "example_question_sqls": [
+      {
+        "id": "00000000000000000000000000000300",
+        "question": [
+          "Qual o ticket médio de cada segmento de cliente?"
+        ],
+        "sql": [
+          "SELECT segmento_cliente,\n",
+          "  COUNT(*) AS clientes,\n",
+          "  SUM(total_compras) AS vendas,\n",
+          "  CAST(SUM(receita) AS DECIMAL(12,2)) AS receita,\n",
+          "  ROUND(SUM(receita) / SUM(total_compras), 2) AS ticket_medio\n",
+          "FROM projetodados.gold.clientes_segmentacao\n",
+          "GROUP BY segmento_cliente\n",
+          "ORDER BY receita DESC\n"
+        ]
+      },
+      {
+        "id": "00000000000000000000000000000301",
+        "question": [
+          "Quanto os clientes TOP_TIER representam da receita?"
+        ],
+        "sql": [
+          "SELECT\n",
+          "  COUNT_IF(segmento_cliente = 'TOP_TIER') AS clientes_top_tier,\n",
+          "  SUM(CASE WHEN segmento_cliente = 'TOP_TIER' THEN receita ELSE 0 END) AS receita_top_tier,\n",
+          "  SUM(receita) AS receita_total,\n",
+          "  ROUND(100 * SUM(CASE WHEN segmento_cliente = 'TOP_TIER' THEN receita ELSE 0 END) / SUM(receita), 1) AS pct_da_receita\n",
+          "FROM projetodados.gold.clientes_segmentacao\n"
+        ]
+      },
+      {
+        "id": "00000000000000000000000000000302",
+        "question": [
+          "Qual a receita por região e categoria?"
+        ],
+        "sql": [
+          "SELECT regiao, categoria,\n",
+          "  COUNT(DISTINCT id_cliente) AS clientes,\n",
+          "  COUNT(*) AS vendas,\n",
+          "  SUM(receita) AS receita,\n",
+          "  ROUND(SUM(receita) / COUNT(*), 2) AS ticket_medio\n",
+          "FROM projetodados.gold.vendas_detalhadas\n",
+          "GROUP BY regiao, categoria\n",
+          "ORDER BY regiao, receita DESC\n"
+        ]
+      },
+      {
+        "id": "00000000000000000000000000000303",
+        "question": [
+          "Quantos produtos estão mais caros que a média do mercado?"
+        ],
+        "sql": [
+          "WITH caros AS (\n",
+          "  SELECT id_produto, categoria, possui_preco_suspeito\n",
+          "  FROM projetodados.gold.precos_competitividade\n",
+          "  WHERE diferenca_pct_vs_media > 0\n",
+          ")\n",
+          "SELECT\n",
+          "  CASE WHEN possui_preco_suspeito THEN 'A confirmar (preço suspeito)' ELSE 'Confirmado' END AS situacao,\n",
+          "  COUNT(DISTINCT id_produto) AS produtos,\n",
+          "  CONCAT_WS(', ', SORT_ARRAY(COLLECT_SET(categoria))) AS categorias\n",
+          "FROM caros\n",
+          "GROUP BY possui_preco_suspeito\n",
+          "UNION ALL\n",
+          "SELECT 'Total', COUNT(DISTINCT id_produto), NULL\n",
+          "FROM caros\n"
+        ]
+      }
+    ],
+    "join_specs": [
+      {
+        "id": "00000000000000000000000000000400",
+        "left": {
+          "identifier": "projetodados.gold.vendas_detalhadas",
+          "alias": "vendas_detalhadas"
+        },
+        "right": {
+          "identifier": "projetodados.gold.clientes_segmentacao",
+          "alias": "clientes_segmentacao"
+        },
+        "sql": [
+          "`vendas_detalhadas`.`id_cliente` = `clientes_segmentacao`.`id_cliente`",
+          "--rt=FROM_RELATIONSHIP_TYPE_MANY_TO_ONE--"
+        ]
+      },
+      {
+        "id": "00000000000000000000000000000401",
+        "left": {
+          "identifier": "projetodados.gold.vendas_produtos",
+          "alias": "vendas_produtos"
+        },
+        "right": {
+          "identifier": "projetodados.gold.precos_competitividade",
+          "alias": "precos_competitividade"
+        },
+        "sql": [
+          "`vendas_produtos`.`id_produto` = `precos_competitividade`.`id_produto`",
+          "--rt=FROM_RELATIONSHIP_TYPE_ONE_TO_ONE--"
+        ]
+      }
+    ],
+    "sql_snippets": {
+      "measures": [
+        {
+          "id": "00000000000000000000000000000500",
+          "alias": "ticket_medio",
+          "display_name": "Ticket médio",
+          "sql": [
+            "ROUND(SUM(vendas_temporais.receita) / SUM(vendas_temporais.total_vendas), 2)"
+          ],
+          "synonyms": [
+            "ticket",
+            "valor médio por venda",
+            "ticket médio por pedido"
+          ]
+        }
+      ]
+    }
+  }
+}

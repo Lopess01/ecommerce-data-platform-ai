@@ -52,6 +52,28 @@ Project guidance for AI agents lives in AGENTS.md and conventions below.
   `SUM(\`receita\`)` direto no widget; campo calculado só para fórmulas (ticket médio, % VIP).
 - Todo `fieldName` dos encodings precisa existir nos `fields` da consulta do widget.
 
+## Regras para o Genie space (agente de IA)
+
+- Um único space, "Diretoria E-commerce", para os três diretores, em cima das 5 golds (nada de
+  bronze ou silver). Conteúdo em `src/genie/diretoria_ecommerce.geniespace.json` (serialized space
+  exportado) e recurso em `resources/diretoria.genie_space.yml`: `warehouse_id: ${var.warehouse_id}`
+  e `parent_path: ${workspace.root_path}`, para não colidir com outro space de mesmo nome.
+- Mudou uma instrução? Edite o JSON e faça deploy. Nunca ajuste o space pela interface: se perde
+  no próximo deploy.
+- Os identificadores das tabelas estão escritos no JSON (`projetodados.gold.<tabela>`), porque o
+  arquivo não passa por variáveis do bundle. Outro catálogo exige trocar no JSON.
+- Não repita nas instruções o que o comentário da coluna já diz; instrução geral só para regra de
+  negócio que não cabe em comentário (até ~2.500 caracteres).
+- Conta em que a IA erra ganha SQL de exemplo, testado no warehouse, SEM repetir as perguntas do
+  teste de aceitação (senão o teste vira cola).
+- Toda mudança no space é conferida perguntando pela API de conversa do Genie e comparando com SQL
+  direto na gold. Só é acerto se a resposta trouxer todos os números esperados.
+- O botão "Ask Genie" dos 3 dashboards aponta para o space pelo id fixo no JSON do dashboard
+  (`uiSettings.genieSpace.overrideId`, hoje o space de dev `01f1b91f35dc15fe8c08a2bdc9d9c7f2`).
+  Em prod o space ganha outro id: troque o `overrideId` nos 3 JSONs ao publicar em prod.
+- Placar de referência (dev, 25/09/2026): 10 de 10 perguntas do teste de aceitação certas, e as
+  perguntas de limite ("Qual foi o nosso lucro?", "Quanto vendemos ontem?") recusadas sem SQL.
+
 ## Números de referência (conferidos no Job em dev, 25/09/2026)
 
 Depois de qualquer mudança, rode o Job e confira que estes números não mudaram
