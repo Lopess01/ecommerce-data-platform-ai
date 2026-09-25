@@ -20,11 +20,11 @@
 
 CREATE OR REFRESH MATERIALIZED VIEW gold.vendas_detalhadas (
   id_venda STRING COMMENT 'Identificador único da venda (chave da tabela, uma linha por venda).',
-  data_venda TIMESTAMP COMMENT 'Data e hora da venda.',
-  data DATE COMMENT 'Data da venda (sem hora).',
+  data_venda TIMESTAMP COMMENT 'Data e hora da venda, em UTC (horário de Brasília = UTC - 3 horas).',
+  data DATE COMMENT 'Data da venda (sem hora), pelo calendário UTC.',
   dia_semana STRING COMMENT 'Dia da semana da venda em português: Domingo, Segunda, Terça, Quarta, Quinta, Sexta ou Sábado. Para ordenar os dias, use dia_semana_num.',
   dia_semana_num INT COMMENT 'Número do dia da semana para ordenação: 1 = Domingo, 2 = Segunda ... 7 = Sábado.',
-  hora INT COMMENT 'Hora do dia da venda, de 0 a 23.',
+  hora INT COMMENT 'Hora do dia da venda em UTC, de 0 a 23 (horário de Brasília = UTC - 3 horas).',
   canal_venda STRING COMMENT 'Canal da venda: ecommerce (loja online) ou loja_fisica. Valores sempre em minúsculas.',
   id_produto STRING COMMENT 'Identificador do produto vendido. Use para contar produtos distintos (há nomes de produto repetidos).',
   nome_produto STRING COMMENT 'Nome do produto. ATENÇÃO: produtos diferentes têm o mesmo nome; para contar produtos use id_produto. "Produto não cadastrado" quando o produto vendido não existe no cadastro.',

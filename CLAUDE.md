@@ -27,6 +27,27 @@ Project guidance for AI agents lives in AGENTS.md and conventions below.
 - Período dos dados: 13/12/2025 a 11/01/2026.
 - Toda gold nova ganha testes no notebook `testes/testes_qualidade.py`.
 
+## Regras para todo dashboard (AI/BI)
+
+- Um arquivo por dashboard: `src/dashboards/<nome>.lvdash.json`, com o recurso em
+  `resources/<nome>.dashboard.yml`: `warehouse_id: ${var.warehouse_id}` (variável com lookup do
+  warehouse "Serverless Starter Warehouse"), `dataset_catalog: ${var.catalog}` e `dataset_schema: gold`.
+- Consultas com o nome da tabela sem catálogo nem schema (`FROM vendas_temporais`), para o mesmo
+  dashboard funcionar em dev e prod.
+- Período fixo dos dados (13/12/2025 a 11/01/2026): nada de `current_date()`.
+- Teste no warehouse TODAS as consultas que viram dataset antes do deploy.
+- Tudo em português: título, subtítulo com período e fonte dos dados, nomes de gráficos e eixos.
+  Canais exibidos como "E-commerce" e "Loja física". Dinheiro em R$.
+- Layout de leitura rápida: título, uma linha de KPIs, gráficos e uma tabela de detalhe para agir.
+- Ticket médio é receita total ÷ número de vendas, nunca média de médias: `SUM(receita) /
+  SUM(total_vendas)` em vendas_temporais, `COUNT(*)` em vendas_detalhadas, `SUM(total_compras)` em
+  clientes_segmentacao.
+- Nunca somar `clientes_unicos` entre linhas. Produto se conta por `id_produto` (há nomes repetidos).
+- Dia da semana se compara pela receita MÉDIA por dia: o período tem 5 sábados e 5 domingos e só 4
+  de cada dia útil.
+- Data e hora estão em UTC: diga isso no eixo.
+- `diferenca_pct_*` está em pontos percentuais (10 = 10%): divida por 100 para usar o formato de %.
+
 ## Números de referência (conferidos no Job em dev, 25/09/2026)
 
 Depois de qualquer mudança, rode o Job e confira que estes números não mudaram
@@ -40,5 +61,10 @@ Depois de qualquer mudança, rode o Job e confira que estes números não mudara
 - `gold.precos_competitividade`: 215 produtos, 35 MAIS_CARO_QUE_TODOS, 15 com preço suspeito
   (todos entre os mais caros que todos). Receita somada R$ 969.837,27: menor que o total porque
   as vendas de produto não cadastrado ficam fora. Não é tabela de receita total.
+- Dashboards (sem filtro): Comercial com receita R$ 974.077,28, 3.020 vendas, ticket R$ 322,54 e
+  4.322 itens (e-commerce: 2.155 vendas e R$ 705.486,21); Customer Success com 50 clientes, 10 VIP
+  com 27,0% da receita, Norte como maior região (R$ 333.078,69); Pricing com 215 produtos, 20 mais
+  caros que todos confirmados (R$ 161.375,09) e 15 com preço suspeito (todos de Tênis, sem venda,
+  +100% vs. mercado); sem suspeitos, Beleza é a categoria mais cara (+1,24%).
 
 @AGENTS.md

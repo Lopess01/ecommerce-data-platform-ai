@@ -16,10 +16,10 @@
 --   decimal e o tipo declarado precisa bater com o da consulta.
 
 CREATE OR REFRESH MATERIALIZED VIEW gold.vendas_temporais (
-  data DATE COMMENT 'Data da venda (sem hora).',
+  data DATE COMMENT 'Data da venda (sem hora), pelo calendário UTC.',
   dia_semana STRING COMMENT 'Dia da semana da venda em português: Domingo, Segunda, Terça, Quarta, Quinta, Sexta ou Sábado. Para ordenar os dias, use dia_semana_num.',
   dia_semana_num INT COMMENT 'Número do dia da semana para ordenação: 1 = Domingo, 2 = Segunda ... 7 = Sábado.',
-  hora INT COMMENT 'Hora do dia da venda, de 0 a 23.',
+  hora INT COMMENT 'Hora do dia da venda em UTC, de 0 a 23 (horário de Brasília = UTC - 3 horas).',
   canal_venda STRING COMMENT 'Canal da venda: ecommerce (loja online) ou loja_fisica. Valores sempre em minúsculas.',
   total_vendas BIGINT COMMENT 'Quantidade de vendas (pedidos) na data, hora e canal. Pode ser somada entre linhas.',
   itens_vendidos BIGINT COMMENT 'Quantidade de unidades vendidas (soma de quantidade) na data, hora e canal. Pode ser somada entre linhas.',
