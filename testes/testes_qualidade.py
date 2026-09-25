@@ -1,5 +1,5 @@
 # Databricks notebook source
-# Testes de qualidade da camada silver.
+# Testes de qualidade das camadas silver e gold.
 #
 # PORQUÊ: as expectations do pipeline olham linha a linha; estes testes olham a
 # tabela inteira (chaves únicas, consistência da receita, proporção de vendas
@@ -47,6 +47,31 @@ testes = {
     "gold_clientes_vip_a_partir_de_22000": f"""
         SELECT count(*) FROM {gold}.clientes_segmentacao
         WHERE segmento_cliente = 'VIP' AND receita < 22000
+    """,
+    # Golds da Diretoria Comercial: todas as vendas entram (inclusive de produto
+    # não cadastrado), então a receita de cada uma tem que fechar com a silver.
+    # vendas_detalhadas é uma linha por venda: os LEFT JOINs não podem duplicar
+    # nem perder vendas, e toda venda precisa achar seu cliente (segmento e região).
+    "gold_vendas_temporais_receita_igual_silver": f"""
+        SELECT CASE WHEN (SELECT sum(receita) FROM {gold}.vendas_temporais)
+                       = (SELECT sum(receita) FROM {silver}.vendas) THEN 0 ELSE 1 END
+    """,
+    "gold_vendas_produtos_receita_igual_silver": f"""
+        SELECT CASE WHEN (SELECT sum(receita) FROM {gold}.vendas_produtos)
+                       = (SELECT sum(receita) FROM {silver}.vendas) THEN 0 ELSE 1 END
+    """,
+    "gold_vendas_detalhadas_receita_igual_silver": f"""
+        SELECT CASE WHEN (SELECT sum(receita) FROM {gold}.vendas_detalhadas)
+                       = (SELECT sum(receita) FROM {silver}.vendas) THEN 0 ELSE 1 END
+    """,
+    "gold_vendas_detalhadas_linhas_igual_silver": f"""
+        SELECT abs((SELECT count(*) FROM {gold}.vendas_detalhadas)
+                 - (SELECT count(*) FROM {silver}.vendas))
+    """,
+    "gold_vendas_detalhadas_id_venda_unico": f"SELECT count(*) - count(DISTINCT id_venda) FROM {gold}.vendas_detalhadas",
+    "gold_vendas_detalhadas_com_segmento_e_regiao": f"""
+        SELECT count(*) FROM {gold}.vendas_detalhadas
+        WHERE segmento_cliente IS NULL OR regiao IS NULL
     """,
     # O Genie escreve SQL lendo os comentários: coluna sem comentário vira
     # chute. Tabelas __materialization* são internas do pipeline e ficam de fora.
