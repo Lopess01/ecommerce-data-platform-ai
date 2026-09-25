@@ -73,6 +73,9 @@ testes = {
         SELECT count(*) FROM {gold}.vendas_detalhadas
         WHERE segmento_cliente IS NULL OR regiao IS NULL
     """,
+    # gold.precos_competitividade: uma linha por produto; produto repetido
+    # contaria duas vezes na classificação e na receita.
+    "gold_precos_id_produto_unico": f"SELECT count(*) - count(DISTINCT id_produto) FROM {gold}.precos_competitividade",
     # O Genie escreve SQL lendo os comentários: coluna sem comentário vira
     # chute. Tabelas __materialization* são internas do pipeline e ficam de fora.
     "gold_colunas_com_comentario": f"""

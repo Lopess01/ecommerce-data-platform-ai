@@ -27,4 +27,18 @@ Project guidance for AI agents lives in AGENTS.md and conventions below.
 - Período dos dados: 13/12/2025 a 11/01/2026.
 - Toda gold nova ganha testes no notebook `testes/testes_qualidade.py`.
 
+## Números de referência (conferidos no Job em dev, 25/09/2026)
+
+Depois de qualquer mudança, rode o Job e confira que estes números não mudaram
+(a bronze é a mesma; se mudarem, alguma regra perdeu ou duplicou linhas).
+
+- `silver.vendas`: 3.020 vendas, receita R$ 974.077,28; 2.155 no ecommerce e 865 na loja física.
+- `gold.vendas_temporais`, `gold.vendas_produtos` e `gold.vendas_detalhadas`: mesmas 3.020 vendas e R$ 974.077,28.
+- 20 vendas de produto não cadastrado, somando R$ 4.240,01 (20 produtos distintos, categoria "Não cadastrado").
+- `silver.produtos`: 215 produtos (82 nomes repetidos: conte por `id_produto`); `gold.vendas_produtos`: 205 produtos vendidos.
+- `gold.clientes_segmentacao`: 50 clientes, sendo 10 VIP, 25 TOP_TIER e 15 REGULAR.
+- `gold.precos_competitividade`: 215 produtos, 35 MAIS_CARO_QUE_TODOS, 15 com preço suspeito
+  (todos entre os mais caros que todos). Receita somada R$ 969.837,27: menor que o total porque
+  as vendas de produto não cadastrado ficam fora. Não é tabela de receita total.
+
 @AGENTS.md
