@@ -1,0 +1,14 @@
+# The main pipeline for projetodados
+
+resources:
+  pipelines:
+    projetodados_etl:
+      name: projetodados_etl
+      catalog: ${var.catalog}
+      schema: ${var.schema}
+      serverless: true
+      root_path: "../src/projetodados_etl"
+
+      libraries:
+        - glob:
+            include: ../src/projetodados_etl/transformations/**

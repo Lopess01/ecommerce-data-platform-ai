@@ -1,0 +1,36 @@
+# This is a Declarative Automation Bundle definition for projetodados.
+# See https://docs.databricks.com/dev-tools/bundles/index.html for documentation.
+bundle:
+  name: projetodados
+  uuid: 2b937059-b093-4aab-a512-1c123c0b0e00
+
+include:
+  - resources/*.yml
+
+# Variable declarations. These variables are assigned in the dev/prod targets below.
+variables:
+  catalog:
+    description: The catalog to use
+  schema:
+    description: The schema to use
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-ec68e912-884d.cloud.databricks.com
+    variables:
+      catalog: projetodados
+      schema: silver
+  prod:
+    mode: production
+    workspace:
+      host: https://dbc-ec68e912-884d.cloud.databricks.com
+      root_path: /Workspace/Users/renatolopesvp@gmail.com/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog: projetodados
+      schema: silver
+    permissions:
+      - user_name: renatolopesvp@gmail.com
+        level: CAN_MANAGE

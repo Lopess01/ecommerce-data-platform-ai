@@ -1,0 +1,20 @@
+# Job "Pipeline E-commerce": atualiza a silver e em seguida roda os testes de qualidade.
+# Os testes só rodam se o pipeline terminar com sucesso.
+
+resources:
+  jobs:
+    pipeline_ecommerce:
+      name: Pipeline E-commerce
+
+      tasks:
+        - task_key: atualiza_pipeline
+          pipeline_task:
+            pipeline_id: ${resources.pipelines.projetodados_etl.id}
+
+        - task_key: testes_qualidade
+          depends_on:
+            - task_key: atualiza_pipeline
+          notebook_task:
+            notebook_path: ../testes/testes_qualidade.py
+            base_parameters:
+              catalogo: ${var.catalog}
